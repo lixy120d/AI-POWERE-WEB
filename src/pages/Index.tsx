@@ -1,13 +1,21 @@
+import { Navigation } from "@/components/Navigation";
 import { HeroSection } from "@/components/HeroSection";
 import { ShowcaseGrid } from "@/components/ShowcaseGrid";
-import { InteractiveDemo } from "@/components/InteractiveDemo";
+import { ContactSection } from "@/components/ContactSection";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection />
-      <ShowcaseGrid />
-      <InteractiveDemo />
+      <Navigation />
+      <div id="home">
+        <HeroSection />
+      </div>
+      <div id="services">
+        <ShowcaseGrid />
+      </div>
+      <div id="contact">
+        <ContactSection />
+      </div>
     </div>
   );
 };

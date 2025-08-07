@@ -1,22 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles, Code, Palette } from "lucide-react";
-import heroImage from "@/assets/hero-bg.jpg";
+import { ArrowRight, Phone, Mail } from "lucide-react";
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0">
-        <img 
-          src={heroImage} 
-          alt="Futuristic technology background"
-          className="w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-hero animate-gradient-shift opacity-60" 
-             style={{ backgroundSize: '400% 400%' }} />
-      </div>
-      
-      {/* Floating particles */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-primary/5">
+      {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-float opacity-60" style={{ animationDelay: '0s' }} />
         <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-primary-glow rounded-full animate-float opacity-40" style={{ animationDelay: '1s' }} />
@@ -24,50 +12,74 @@ export const HeroSection = () => {
         <div className="absolute top-2/3 right-1/4 w-2 h-2 bg-primary-glow rounded-full animate-float opacity-50" style={{ animationDelay: '1.5s' }} />
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 text-center space-y-8 px-6 max-w-4xl mx-auto">
-        <div className="space-y-4 animate-slide-up">
-          <div className="flex items-center justify-center space-x-2 mb-6">
-            <Sparkles className="w-8 h-8 text-primary animate-glow" />
-            <span className="text-primary font-semibold text-lg tracking-wide">LOVABLE AI SHOWCASE</span>
+      <div className="relative z-10 max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+        {/* Left content */}
+        <div className="space-y-8 animate-slide-up">
+          <div className="flex items-center space-x-4 mb-6">
+            <img 
+              src="/lovable-uploads/3c1f70c1-c8ca-4895-9763-9ec472727f50.png" 
+              alt="F&E Tech Lab Logo" 
+              className="w-16 h-16"
+            />
+            <div>
+              <h2 className="text-2xl font-bold text-primary">F&E Tech Lab</h2>
+              <p className="text-muted-foreground">Connect. Code. Conquer.</p>
+            </div>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
-            Watch Me
-            <span className="bg-gradient-primary bg-clip-text text-transparent animate-gradient-shift" style={{ backgroundSize: '200% 200%' }}>
-              {" "}Create Magic
-            </span>
+          <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
+            Transform Your
+            <span className="bg-gradient-primary bg-clip-text text-transparent"> Digital Vision</span>
+            <br />Into Reality
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Beautiful designs, smooth animations, interactive components, and flawless code—all generated in real-time.
+          <p className="text-xl text-muted-foreground leading-relaxed">
+            We create stunning web applications, modern systems, and digital solutions that drive your business forward. From concept to deployment, we bring your ideas to life with cutting-edge technology.
           </p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button size="lg" className="text-lg px-8 py-4">
+              Get Started
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+            <Button variant="outline" size="lg" className="text-lg px-8 py-4">
+              <Phone className="w-5 h-5 mr-2" />
+              Call Now
+            </Button>
+          </div>
+
+          {/* Contact info */}
+          <div className="flex flex-col sm:flex-row gap-6 pt-4">
+            <div className="flex items-center space-x-2">
+              <Phone className="w-4 h-4 text-primary" />
+              <span className="text-muted-foreground">+1 (555) 123-4567</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Mail className="w-4 h-4 text-primary" />
+              <span className="text-muted-foreground">hello@fetechlab.com</span>
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <Button variant="hero" size="lg" className="text-lg px-8 py-4">
-            <Code className="w-5 h-5 mr-2" />
-            See the Code
-          </Button>
-          <Button variant="glass" size="lg" className="text-lg px-8 py-4">
-            <Palette className="w-5 h-5 mr-2" />
-            Explore Design
-          </Button>
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-8 mt-16 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-primary">100%</div>
-            <div className="text-muted-foreground">Custom Design</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-primary">∞</div>
-            <div className="text-muted-foreground">Possibilities</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-primary">0ms</div>
-            <div className="text-muted-foreground">Loading Time</div>
+        {/* Right content - Stats */}
+        <div className="space-y-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <div className="grid grid-cols-2 gap-6">
+            <div className="text-center p-6 bg-card border border-border rounded-lg">
+              <div className="text-4xl font-bold text-primary mb-2">100+</div>
+              <div className="text-muted-foreground">Projects Delivered</div>
+            </div>
+            <div className="text-center p-6 bg-card border border-border rounded-lg">
+              <div className="text-4xl font-bold text-primary mb-2">50+</div>
+              <div className="text-muted-foreground">Happy Clients</div>
+            </div>
+            <div className="text-center p-6 bg-card border border-border rounded-lg">
+              <div className="text-4xl font-bold text-primary mb-2">5+</div>
+              <div className="text-muted-foreground">Years Experience</div>
+            </div>
+            <div className="text-center p-6 bg-card border border-border rounded-lg">
+              <div className="text-4xl font-bold text-primary mb-2">24/7</div>
+              <div className="text-muted-foreground">Support</div>
+            </div>
           </div>
         </div>
       </div>
