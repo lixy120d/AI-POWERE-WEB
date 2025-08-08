@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Phone } from "lucide-react";
 import { useState } from "react";
+import feLogo from "@/assets/fe-tech-lab-logo.png";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,9 +28,9 @@ export const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <img 
-              src="/lovable-uploads/3c1f70c1-c8ca-4895-9763-9ec472727f50.png" 
-              alt="F&E Tech Lab Logo" 
+            <img
+              src={feLogo}
+              alt="F&E Tech Lab Logo"
               className="w-8 h-8"
             />
             <div>

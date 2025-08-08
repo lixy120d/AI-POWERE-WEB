@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone, Mail } from "lucide-react";
+import feLogo from "@/assets/fe-tech-lab-logo.png";
 
 export const HeroSection = () => {
   return (
@@ -17,7 +18,7 @@ export const HeroSection = () => {
         <div className="space-y-8 animate-slide-up">
           <div className="flex items-center space-x-4 mb-6">
             <img 
-              src="/lovable-uploads/3c1f70c1-c8ca-4895-9763-9ec472727f50.png" 
+              src={feLogo} 
               alt="F&E Tech Lab Logo" 
               className="w-16 h-16"
             />
