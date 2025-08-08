@@ -31,7 +31,7 @@ export const Navigation = () => {
             <img
               src={feLogo}
               alt="F&E Tech Lab Logo"
-              className="w-10 h-10 md:w-12 md:h-12"
+              className="w-12 h-12 md:w-14 md:h-14"
             />
             <div>
               <span className="text-xl font-bold text-primary">F&E Tech Lab</span>

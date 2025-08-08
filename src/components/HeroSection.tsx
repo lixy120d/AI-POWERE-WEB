@@ -20,7 +20,7 @@ export const HeroSection = () => {
             <img 
               src={feLogo} 
               alt="F&E Tech Lab Logo" 
-              className="w-20 h-20 md:w-24 md:h-24"
+              className="w-24 h-24 md:w-32 md:h-32"
             />
             <div>
               <h2 className="text-2xl font-bold text-primary">F&E Tech Lab</h2>
