@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone, Mail } from "lucide-react";
-import feLogo from "@/assets/fe-tech-lab-logo.png";
+const feLogo = "/lovable-uploads/a6f28e29-1fc3-4139-99a4-00f100f8a5da.png";
 
 export const HeroSection = () => {
   return (

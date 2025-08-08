@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Phone } from "lucide-react";
 import { useState } from "react";
-import feLogo from "@/assets/fe-tech-lab-logo.png";
+const feLogo = "/lovable-uploads/a6f28e29-1fc3-4139-99a4-00f100f8a5da.png";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
