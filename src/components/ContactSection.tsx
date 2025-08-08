@@ -131,7 +131,7 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground">Phone</h4>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <p className="text-muted-foreground">+256-726-798-473</p>
                     <p className="text-sm text-muted-foreground">Mon-Fri 9am-6pm EST</p>
                   </div>
                 </div>
@@ -142,7 +142,7 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground">Email</h4>
-                    <p className="text-muted-foreground">hello@fetechlab.com</p>
+                    <p className="text-muted-foreground">felxkatumba4@gmail.com</p>
                     <p className="text-sm text-muted-foreground">We'll respond within 24 hours</p>
                   </div>
                 </div>
@@ -153,7 +153,7 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground">Location</h4>
-                    <p className="text-muted-foreground">New York, NY</p>
+                    <p className="text-muted-foreground">Uganda, Kampala</p>
                     <p className="text-sm text-muted-foreground">Serving clients worldwide</p>
                   </div>
                 </div>

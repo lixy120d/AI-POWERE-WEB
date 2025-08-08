@@ -1,16 +1,43 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Phone } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { AuthDialog } from "@/components/AuthDialog";
 const feLogo = "/lovable-uploads/a6f28e29-1fc3-4139-99a4-00f100f8a5da.png";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { toast } = useToast();
+  const loginPopupTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'SIGNED_IN') {
+        if (loginPopupTimer.current) window.clearTimeout(loginPopupTimer.current);
+        loginPopupTimer.current = window.setTimeout(() => {
+          toast({
+            title: "Welcome!",
+            description: "You’re logged in. You can dismiss this message.",
+          });
+        }, 60000);
+      }
+      if (event === 'SIGNED_OUT') {
+        if (loginPopupTimer.current) window.clearTimeout(loginPopupTimer.current);
+      }
+    });
+
+    return () => {
+      if (loginPopupTimer.current) window.clearTimeout(loginPopupTimer.current);
+      subscription.unsubscribe();
+    };
+  }, [toast]);
 
   const navItems = [
     { label: "Home", href: "#home" },
     { label: "Services", href: "#services" },
-    { label: "About", href: "#about" },
+    { label: "Projects", href: "#projects" },
     { label: "Contact", href: "#contact" }
   ];
 
@@ -49,6 +76,7 @@ export const Navigation = () => {
                 {item.label}
               </button>
             ))}
+            <AuthDialog />
             <Button size="sm">
               <Phone className="w-4 h-4 mr-2" />
               Get Quote
@@ -73,6 +101,7 @@ export const Navigation = () => {
                     {item.label}
                   </button>
                 ))}
+                <AuthDialog triggerClassName="w-full" triggerSize="default" />
                 <Button className="w-full mt-6">
                   <Phone className="w-4 h-4 mr-2" />
                   Get Quote
