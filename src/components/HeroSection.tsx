@@ -53,11 +53,11 @@ export const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-6 pt-4">
             <div className="flex items-center space-x-2">
               <Phone className="w-4 h-4 text-primary" />
-              <span className="text-muted-foreground">+1 (555) 123-4567</span>
+              <a href="tel:+256726798473" className="text-muted-foreground hover:underline underline-offset-4">+256-726-798-473</a>
             </div>
             <div className="flex items-center space-x-2">
               <Mail className="w-4 h-4 text-primary" />
-              <span className="text-muted-foreground">hello@fetechlab.com</span>
+              <a href="mailto:felxkatumba4@gmail.com" className="text-muted-foreground hover:underline underline-offset-4">felxkatumba4@gmail.com</a>
             </div>
           </div>
         </div>

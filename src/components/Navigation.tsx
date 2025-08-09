@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { AuthDialog } from "@/components/AuthDialog";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 const feLogo = "/lovable-uploads/a6f28e29-1fc3-4139-99a4-00f100f8a5da.png";
 
 export const Navigation = () => {
@@ -12,9 +13,18 @@ export const Navigation = () => {
   const { toast } = useToast();
   const loginPopupTimer = useRef<number | null>(null);
 
+  const [userInitial, setUserInitial] = useState<string | null>(null);
+
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+    const deriveInitial = (fullName?: string | null, email?: string | null) => {
+      const src = (fullName || email || '').trim();
+      return src ? src.charAt(0).toUpperCase() : null;
+    };
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN') {
+        const meta = session?.user?.user_metadata as any;
+        setUserInitial(deriveInitial(meta?.full_name, session?.user?.email ?? null));
         if (loginPopupTimer.current) window.clearTimeout(loginPopupTimer.current);
         loginPopupTimer.current = window.setTimeout(() => {
           toast({
@@ -24,7 +34,16 @@ export const Navigation = () => {
         }, 60000);
       }
       if (event === 'SIGNED_OUT') {
+        setUserInitial(null);
         if (loginPopupTimer.current) window.clearTimeout(loginPopupTimer.current);
+      }
+    });
+
+    supabase.auth.getSession().then(({ data }) => {
+      const session = data.session;
+      if (session?.user) {
+        const meta = session.user.user_metadata as any;
+        setUserInitial(deriveInitial(meta?.full_name, session.user.email ?? null));
       }
     });
 
@@ -76,11 +95,19 @@ export const Navigation = () => {
                 {item.label}
               </button>
             ))}
-            <AuthDialog />
-            <Button size="sm">
-              <Phone className="w-4 h-4 mr-2" />
-              Get Quote
-            </Button>
+            {userInitial ? (
+              <Avatar className="h-8 w-8">
+                <AvatarFallback className="bg-primary/10 text-primary font-semibold">{userInitial}</AvatarFallback>
+              </Avatar>
+            ) : (
+              <AuthDialog />
+            )}
+            <a href="https://wa.me/256726798473" target="_blank" rel="noopener noreferrer">
+              <Button size="sm">
+                <Phone className="w-4 h-4 mr-2" />
+                Get Quote
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Navigation */}
@@ -101,11 +128,21 @@ export const Navigation = () => {
                     {item.label}
                   </button>
                 ))}
-                <AuthDialog triggerClassName="w-full" triggerSize="default" />
-                <Button className="w-full mt-6">
-                  <Phone className="w-4 h-4 mr-2" />
-                  Get Quote
-                </Button>
+                {userInitial ? (
+                  <div className="flex items-center justify-start">
+                    <Avatar className="h-10 w-10">
+                      <AvatarFallback className="bg-primary/10 text-primary font-semibold">{userInitial}</AvatarFallback>
+                    </Avatar>
+                  </div>
+                ) : (
+                  <AuthDialog triggerClassName="w-full" triggerSize="default" />
+                )}
+                <a href="https://wa.me/256726798473" target="_blank" rel="noopener noreferrer" className="w-full mt-6">
+                  <Button className="w-full">
+                    <Phone className="w-4 h-4 mr-2" />
+                    Get Quote
+                  </Button>
+                </a>
               </div>
             </SheetContent>
           </Sheet>
