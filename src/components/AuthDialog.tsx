@@ -9,6 +9,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { supabase } from "@/integrations/supabase/client";
+import { Separator } from "@/components/ui/separator";
 
 const loginSchema = z.object({
   email: z.string().email("Enter a valid email"),
@@ -94,6 +95,32 @@ export const AuthDialog = ({ triggerClassName, triggerSize = "sm" }: AuthDialogP
     setTab("login");
   };
 
+  const handleResetPassword = async () => {
+    const email = loginForm.getValues("email");
+    if (!email) {
+      toast({ title: "Enter your email", description: "Please enter your email to reset your password." });
+      return;
+    }
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/`
+    });
+    if (error) {
+      toast({ title: "Reset failed", description: error.message });
+      return;
+    }
+    toast({ title: "Check your email", description: "We sent a password reset link to your email." });
+  };
+
+  const handleGoogleSignIn = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: `${window.location.origin}/` }
+    });
+    if (error) {
+      toast({ title: "Google sign-in failed", description: error.message });
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -129,6 +156,9 @@ export const AuthDialog = ({ triggerClassName, triggerSize = "sm" }: AuthDialogP
                   <p className="text-destructive text-sm">{loginForm.formState.errors.password.message}</p>
                 )}
               </div>
+              <div className="flex justify-end -mt-2">
+                <Button type="button" variant="link" size="sm" onClick={handleResetPassword}>Forgot password?</Button>
+              </div>
               <div className="flex gap-2 justify-end">
                 <DialogClose asChild>
                   <Button type="button" variant="ghost">Cancel</Button>
@@ -138,6 +168,8 @@ export const AuthDialog = ({ triggerClassName, triggerSize = "sm" }: AuthDialogP
                 </Button>
               </div>
             </form>
+            <Separator className="my-4" />
+            <Button type="button" variant="outline" className="w-full" onClick={handleGoogleSignIn}>Continue with Google</Button>
           </TabsContent>
 
           <TabsContent value="signup">
@@ -188,6 +220,8 @@ export const AuthDialog = ({ triggerClassName, triggerSize = "sm" }: AuthDialogP
                 </Button>
               </div>
             </form>
+            <Separator className="my-4" />
+            <Button type="button" variant="outline" className="w-full" onClick={handleGoogleSignIn}>Continue with Google</Button>
           </TabsContent>
         </Tabs>
       </DialogContent>

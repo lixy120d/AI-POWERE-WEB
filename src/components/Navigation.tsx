@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { AuthDialog } from "@/components/AuthDialog";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+
 const feLogo = "/lovable-uploads/a6f28e29-1fc3-4139-99a4-00f100f8a5da.png";
 
 export const Navigation = () => {
@@ -96,9 +96,7 @@ export const Navigation = () => {
               </button>
             ))}
             {userInitial ? (
-              <Avatar className="h-8 w-8">
-                <AvatarFallback className="bg-primary/10 text-primary font-semibold">{userInitial}</AvatarFallback>
-              </Avatar>
+              <Button size="sm" variant="secondary">Profile</Button>
             ) : (
               <AuthDialog />
             )}
@@ -129,11 +127,7 @@ export const Navigation = () => {
                   </button>
                 ))}
                 {userInitial ? (
-                  <div className="flex items-center justify-start">
-                    <Avatar className="h-10 w-10">
-                      <AvatarFallback className="bg-primary/10 text-primary font-semibold">{userInitial}</AvatarFallback>
-                    </Avatar>
-                  </div>
+                  <Button className="w-full" variant="secondary" size="default">Profile</Button>
                 ) : (
                   <AuthDialog triggerClassName="w-full" triggerSize="default" />
                 )}
